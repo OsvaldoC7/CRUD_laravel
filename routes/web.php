@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PaginasController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,8 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/presentacion/{nombre}/{apellido?}', function($nombre = null, $apellido = null) {
-    $nombre_completo = strtoupper($nombre . ' ' . $apellido);
-    return view('presentacion', compact('nombre', 'apellido'))
-        ->with(['nombre_completo' => $nombre_completo]);
-});
+Route::get('/presentacion/{nombre}/{apellido?}', [PaginasController::class, 'presentacion']);
+Route::get('/contacto', [PaginasController::class, 'contacto'])->name('contacto');
+Route::get('/informacion', [PaginasController::class, 'informacion'])->name('informacion');
