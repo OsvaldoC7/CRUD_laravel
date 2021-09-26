@@ -15,5 +15,21 @@
         <li><a href="{{route('contacto')}}">Contacto</a></li>
     </ul>
 
+    <form action="{{route('recibe_contacto')}}" method="POST">
+
+        @csrf
+        <label for="correo">Correo: </label><br>
+        <input type="email" name="correo" id="correo">
+        <br>
+        <label for="telefono">Telefono: </label><br>
+        <input type="text" name="telefono" id="telefono">
+        <br>
+        <label for="comentario">Comentario: </label><br>
+        <textarea name="comentario" id="comentario" cols="30" rows="5"></textarea>
+        <br>
+        <input type="submit" value="Enviar">
+
+    </form>
+
 </body>
 </html>
