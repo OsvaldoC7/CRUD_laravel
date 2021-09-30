@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PaginasController;
+use App\Http\Controllers\PersonaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +23,12 @@ Route::get('/presentacion/{nombre}/{apellido?}', [PaginasController::class, 'pre
 Route::get('/contacto', [PaginasController::class, 'contacto'])->name('contacto');
 Route::get('/informacion', [PaginasController::class, 'informacion'])->name('informacion');
 Route::post('/contacto', [PaginasController::class, 'recibeContacto'])->name('recibe_contacto');
+// Route::get('/personas', [PersonaController::class, 'index']);
+// Route::get('/personas/create', [PersonaController::class, 'create']);
+// Route::post('/personas/create', [PersonaController::class, 'store']);
+
+Route::resource('persona', PersonaController::class);
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
