@@ -8,7 +8,18 @@
 </head>
 <body>
     
-    <h1>show</h1>
+    <h1>Informacion de {{$persona->nombre}}</h1>
+
+    <a href="{{route('persona.index')}}">Listado de personas</a>
+
+    <ul>
+        <li>{{$persona->apellido_paterno . ' ' . $persona->apellido_materno}}</li>
+        <li>{{$persona->codigo}}</li>
+        <li>{{$persona->telefono}}</li>
+        <li>{{$persona->correo}}</li>
+    </ul>
+
+    <a href="{{route('persona.edit', $persona)}}">Editar</a>
 
 </body>
 </html>

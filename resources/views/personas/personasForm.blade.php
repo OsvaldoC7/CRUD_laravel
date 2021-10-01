@@ -8,7 +8,51 @@
 </head>
 <body>
 
-    <h1>Formulario</h1>
+    <h1>Formulario para {{isset($persona) ? 'editar' : 'crear'}} persona</h1>
+
+    @if($errors->any())
+
+        <div>
+            <ul>
+
+                @foreach ($errors->all() as $error)
+                    <li>{{$error}}</li>
+                @endforeach
+
+            </ul>
+        </div>
+
+    @endif
+
+    @if(isset($persona))
+        <form action="{{route('persona.update', $persona)}}" method="post">
+        @method('PATCH')
+    @else
+        <form action="{{route('persona.store')}}" method="post">
+    @endif
+
+        @csrf
+        <label for="nombre">Nombre: </label><br>
+        <input type="text" name="nombre" value="{{$persona->nombre ?? ''}}">
+        <br>
+        <label for="apellido_paterno">Apellido paterno: </label><br>
+        <input type="text" name="apellido_paterno" value="{{$persona->apellido_paterno ?? ''}}">
+        <br>
+        <label for="apellido_materno">Apellido materno: </label><br>
+        <input type="text" name="apellido_materno" value="{{$persona->apellido_materno ?? ''}}">
+        <br>
+        <label for="codigo">Codigo: </label><br>
+        <input type="text" name="codigo" value="{{$persona->codigo ?? ''}}">
+        <br>
+        <label for="telefoono">Telefono: </label><br>
+        <input type="text" name="telefono" value="{{$persona->telefono ?? ''}}">
+        <br>
+        <label for="correo">Correo: </label><br>
+        <input type="text" name="correo" value="{{$persona->correo ?? ''}}">
+        <br><br>
+        <input type="submit" value="Guardar">
+    
+    </form>
     
 </body>
 </html>

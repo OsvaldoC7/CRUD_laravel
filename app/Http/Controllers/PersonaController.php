@@ -13,7 +13,9 @@ class PersonaController extends Controller {
      */
     public function index() {
         
-        return view('personas/personasIndex');
+        $personas = Persona::all();
+
+        return view('personas/personasIndex', compact('personas'));
 
     }
 
@@ -33,15 +35,30 @@ class PersonaController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        /*
-            Validar datos
-            Crear instacia del modelo
-            Asignar propiedades del modelo
-            Guardar
-            Redireccionar a index
-        */
+    public function store(Request $request) {
+
+        $request->validate([
+
+            'nombre' => 'required|max:255',
+            'apellido_paterno' => 'required|max:255',
+            'apellido_materno' => 'max:255',
+            'codigo' => 'required|max:255|unique:App\Models\Persona,codigo',
+            'correo' => 'email|max:255',
+            'telefono' => 'max:50'
+
+        ]);
+
+        $persona = new Persona();
+        $persona->nombre = $request->nombre;
+        $persona->apellido_paterno = $request->apellido_paterno;
+        $persona->apellido_materno = $request->apellido_materno ?? '';
+        $persona->codigo = $request->codigo;
+        $persona->telefono = $request->telefono ?? '';
+        $persona->correo = $request->correo ?? '';
+        $persona->save();
+
+        return redirect()->route('persona.index');
+        
     }
 
     /**
@@ -50,9 +67,10 @@ class PersonaController extends Controller {
      * @param  \App\Models\Persona  $persona
      * @return \Illuminate\Http\Response
      */
-    public function show(Persona $persona)
-    {
-        //
+    public function show(Persona $persona) {
+
+        return view('personas.personasShow', compact('persona'));
+        
     }
 
     /**
@@ -61,9 +79,10 @@ class PersonaController extends Controller {
      * @param  \App\Models\Persona  $persona
      * @return \Illuminate\Http\Response
      */
-    public function edit(Persona $persona)
-    {
-        //
+    public function edit(Persona $persona) {
+
+        return view('personas.personasForm', compact('persona'));
+        
     }
 
     /**
@@ -73,9 +92,29 @@ class PersonaController extends Controller {
      * @param  \App\Models\Persona  $persona
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Persona $persona)
-    {
-        //
+    public function update(Request $request, Persona $persona) {
+
+        $request->validate([
+
+            'nombre' => 'required|max:255',
+            'apellido_paterno' => 'required|max:255',
+            'apellido_materno' => 'max:255',
+            //'codigo' => 'required|max:255|unique:App\Models\Persona,codigo',
+            'correo' => 'email|max:255',
+            'telefono' => 'max:50'
+
+        ]);
+
+        $persona->nombre = $request->nombre;
+        $persona->apellido_paterno = $request->apellido_paterno;
+        $persona->apellido_materno = $request->apellido_materno ?? '';
+        $persona->codigo = $request->codigo;
+        $persona->telefono = $request->telefono ?? '';
+        $persona->correo = $request->correo ?? '';
+        $persona->save();
+
+        return redirect()->route('persona.show', $persona);
+
     }
 
     /**
