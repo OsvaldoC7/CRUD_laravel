@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Persona;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class PersonaController extends Controller {
     /**
@@ -47,15 +48,18 @@ class PersonaController extends Controller {
             'telefono' => 'max:50'
 
         ]);
+        
+        $request->merge(['apellido_materno' => $request->apellido_materno]);
+        Persona::create($request->all());
 
-        $persona = new Persona();
-        $persona->nombre = $request->nombre;
-        $persona->apellido_paterno = $request->apellido_paterno;
-        $persona->apellido_materno = $request->apellido_materno ?? '';
-        $persona->codigo = $request->codigo;
-        $persona->telefono = $request->telefono ?? '';
-        $persona->correo = $request->correo ?? '';
-        $persona->save();
+        // $persona = new Persona();
+        // $persona->nombre = $request->nombre;
+        // $persona->apellido_paterno = $request->apellido_paterno;
+        // $persona->apellido_materno = $request->apellido_materno ?? '';
+        // $persona->codigo = $request->codigo;
+        // $persona->telefono = $request->telefono ?? '';
+        // $persona->correo = $request->correo ?? '';
+        // $persona->save();
 
         return redirect()->route('persona.index');
         
@@ -99,7 +103,10 @@ class PersonaController extends Controller {
             'nombre' => 'required|max:255',
             'apellido_paterno' => 'required|max:255',
             'apellido_materno' => 'max:255',
-            //'codigo' => 'required|max:255|unique:App\Models\Persona,codigo',
+            'codigo' => [
+                        'required',
+                        Rule::unique('personas')->ignore($persona->id)
+                    ],
             'correo' => 'email|max:255',
             'telefono' => 'max:50'
 
@@ -125,6 +132,7 @@ class PersonaController extends Controller {
      */
     public function destroy(Persona $persona)
     {
-        //
+        $persona->delete();
+        return redirect()->route('persona.index');
     }
 }

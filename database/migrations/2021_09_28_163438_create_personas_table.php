@@ -17,7 +17,7 @@ class CreatePersonasTable extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('apellido_paterno');
-            $table->string('apellido_materno');
+            $table->string('apellido_materno')->default('');
             $table->string('codigo');
             $table->string('telefono', 50)->default('');
             $table->string('correo')->default('');
