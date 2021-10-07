@@ -8,7 +8,7 @@
 </head>
 <body>
     
-    <h1>Informacion de {{$persona->nombre}}</h1>
+    <h1>Informacion de {{$persona->nombre}}</h1><hr>
 
     <a href="{{route('persona.index')}}">Listado de personas</a>
 
@@ -19,7 +19,9 @@
         <li>{{$persona->correo}}</li>
     </ul>
 
-    <a href="{{route('persona.edit', $persona)}}">Editar</a>
+    <p>Usuario Creador: {{$persona->user->name}} ({{$persona->user->email}})</p>
+
+    <a href="{{route('persona.edit', $persona)}}">Editar</a><br><hr>
 
     <form action="{{route('persona.destroy', $persona)}}" method="POST">
         @method('DELETE')    
