@@ -27,6 +27,7 @@ Route::post('/contacto', [PaginasController::class, 'recibeContacto'])->name('re
 // Route::get('/personas/create', [PersonaController::class, 'create']);
 // Route::post('/personas/create', [PersonaController::class, 'store']);
 
+//Route::resource('persona', PersonaController::class)->middleware('auth');
 Route::resource('persona', PersonaController::class);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

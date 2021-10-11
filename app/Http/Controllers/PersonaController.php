@@ -8,6 +8,12 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 
 class PersonaController extends Controller {
+
+    // Ejemplo middleware
+    /*public function __construct() {
+        $this->middleware('auth')->except('index');
+    }*/
+
     /**
      * Display a listing of the resource.
      *
@@ -17,6 +23,7 @@ class PersonaController extends Controller {
         
         //$personas = Persona::all();
         //$personas = Persona::where('user_id', Autht::id()->get())
+        
         $personas = Auth::user()->personas;
         //$personas = Auth::user()->personas()->get();
 
