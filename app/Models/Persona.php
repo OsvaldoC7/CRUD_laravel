@@ -20,4 +20,8 @@ class Persona extends Model {
         return $this->belongsTo(User::class);
     }
 
+    public function areas() {
+        return $this->belongsToMany(Area::class);
+    }
+
 }

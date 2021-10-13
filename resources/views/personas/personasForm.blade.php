@@ -49,6 +49,13 @@
         <br>
         <label for="correo">Correo: </label><br>
         <input type="text" name="correo" value="{{$persona->correo ?? ''}}">
+        <br>
+        <label for="area_id">Area:</label><br>
+        <select name="area_id[]" id="area_id" multiple>
+            @foreach ($areas as $area)
+                <option value="{{$area->id}}" {{array_search($area->id, $persona->areas->pluck('id')->toArray()) === false ? '' : 'selected'}}>{{$area->nombre_area}}</option>
+            @endforeach
+        </select>
         <br><br>
         <input type="submit" value="Guardar">
     

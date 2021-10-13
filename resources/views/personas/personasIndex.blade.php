@@ -16,6 +16,7 @@
 
         <thead>
             <tr>
+                <th>Areas</th>
                 <th>Usuario</th>
                 <th>Id</th>
                 <th>Nombre</th>
@@ -31,6 +32,13 @@
 
             @foreach($personas as $persona)
                 <tr>
+                    <td>
+                        <ul>
+                        @foreach ($persona->areas as $area)
+                            <li>{{$area->nombre_area}}</li>
+                        @endforeach
+                        </ul>
+                    </td>
                     <td>{{$persona->user->name}}</td>
                     <td><a href="{{route('persona.show', $persona->id)}}">{{$persona->id}}</a></td>
                     <td>{{$persona->nombre}}</td>
