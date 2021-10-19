@@ -22,7 +22,7 @@ class PersonaController extends Controller {
      */
     public function index() {
         
-        //$personas = Persona::all();
+        //$personas = Persona::with('areas')->get();
         //$personas = Persona::where('user_id', Autht::id()->get())
         
         $personas = Auth::user()->personas;
