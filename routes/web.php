@@ -33,3 +33,7 @@ Route::resource('persona', PersonaController::class);
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::get('/inicio', function() {
+    return view('dashboard-view-navigation');
+});
