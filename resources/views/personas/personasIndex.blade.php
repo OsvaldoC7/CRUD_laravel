@@ -19,6 +19,7 @@
                 <th>Codigo</th>
                 <th>Telefono</th>
                 <th>Correo</th>
+                <th>Nombre Completo</th>
             </tr>
         </thead>
 
@@ -41,6 +42,7 @@
                     <td>{{$persona->codigo}}</td>
                     <td>{{$persona->telefono}}</td>
                     <td>{{$persona->correo}}</td>
+                    <td>{{$persona->nombre_completo}}</td>
                 </tr>
             @endforeach
 

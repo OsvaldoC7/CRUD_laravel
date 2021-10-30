@@ -27,4 +27,12 @@ class Persona extends Model {
         return $this->belongsToMany(Area::class);
     }
 
+    public function getNombreCompletoAttribute() {
+        return $this->nombre . ' ' . $this->apellido_paterno . ' ' . $this->apellido_materno;
+    }
+
+    public function setCorreoAttribute($correo) {
+        return $this->attributes['correo'] = strtolower($correo);
+    }
+
 }
